@@ -22,17 +22,20 @@ birthday_experiments = function(n, expes){
   #sams_matrix = 
   for(i in 1:expes){
     sam = sample(1:365, n, replace=TRUE)
-    #num_days = 0
+    num_days = 0
     for(day in sam){
       repeats = length(which(sam==day))
       if(repeats > 2){
-        occurences = occurences + 1
+        num_days = num_days + 1
       }
+    }
+    if(num_days > 0){
+      occurences = occurences + 1
     }
   }
   return(occurences/expes)
 }
-
+print(birthday_experiments(100, 100))
 prob = numeric(200)
 for(i in 1:200){
   prob[i] = birthday_experiments(i, 100)
