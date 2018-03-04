@@ -8,6 +8,7 @@ generate_plot= function(sample, n, p){
   lines(n*p, n, col="red", type="l")
 }
 
+
 get_relative_error = function(sample, n, p){
   vector_n = c(1:n)
   error_vector = abs(cumsum(sample) - vector_n*p)/vector_n*p
@@ -20,11 +21,14 @@ birthday_experiments = function(n, expes){
   occurences = 0
   #sams_matrix = 
   for(i in 1:expes){
-    sam = ceiling(runif(n, 1, 365))
-    if(anyDuplicated(sam) >= 2){
-      occurences = occurences + 1
+    sam = sample(1:365, n, replace=TRUE)
+    #num_days = 0
+    for(day in sam){
+      repeats = length(which(sam==day))
+      if(repeats > 2){
+        occurences = occurences + 1
+      }
     }
-    #print(sam)
   }
   return(occurences/expes)
 }
@@ -36,7 +40,7 @@ for(i in 1:200){
 #print(prob)
 plot(prob, 1:200)
 
-estimate_n = function(n){
+estimate_n = function(n, expes){
   prob = numeric(n)
   least_n = 1
   for(i in 1:n){
@@ -47,7 +51,7 @@ estimate_n = function(n){
   }
   print(least_n)
 }
-#estimate_n(200, 100)
+estimate_n(200, 100)
 
 count_days = function(){
   vec_days = numeric(100)
@@ -71,4 +75,4 @@ averages = numeric(100)
 for(i in 1:100){
   averages[i] = mean(count_days())
 }
-hist(averages)
+#hist(averages)
