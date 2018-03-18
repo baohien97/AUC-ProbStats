@@ -1,2 +1,4 @@
 # prob-stats-assignments
-All assignments made in R
+All (lab only)  assignments made in R
+- AsR - dl March 8th - probability
+[...]
